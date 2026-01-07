@@ -37,15 +37,15 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useQuery } from "@tanstack/vue-query";
-import { Alert, Button } from "frappe-ui";
+import { useQuery } from "@tanstack/vue-query"
+import { Alert, Button } from "frappe-ui"
+import { ref } from "vue"
 
-import { fetchBills } from "../api";
-import { useBillSummary } from "../composables/useBillSummary";
-import DataTable from "./DataTable.vue";
-import NewConnectionForm from "./NewConnectionForm.vue";
-import SummaryNumbersChart from "./SummaryNumbersChart.vue";
+import { fetchBills } from "../api"
+import { useBillSummary } from "../composables/useBillSummary"
+import DataTable from "./DataTable.vue"
+import NewConnectionForm from "./NewConnectionForm.vue"
+import SummaryNumbersChart from "./SummaryNumbersChart.vue"
 
 const props = defineProps({
 	serviceType: {
@@ -53,9 +53,9 @@ const props = defineProps({
 		required: true,
 		validator: (value) => ["Electricity", "Water", "Gas"].includes(value),
 	},
-});
+})
 
-const showNewConnectionDialog = ref(false);
+const showNewConnectionDialog = ref(false)
 
 const {
 	data: bills,
@@ -65,16 +65,16 @@ const {
 } = useQuery({
 	queryKey: ["bills", props.serviceType],
 	queryFn: () => fetchBills(props.serviceType),
-});
+})
 
-const summaryNumbersCharts = useBillSummary(bills);
+const summaryNumbersCharts = useBillSummary(bills)
 
 const openNewConnectionDialog = () => {
-	showNewConnectionDialog.value = true;
-};
+	showNewConnectionDialog.value = true
+}
 
 const handleNewConnectionSuccess = () => {
-	refetch();
-};
+	refetch()
+}
 </script>
 

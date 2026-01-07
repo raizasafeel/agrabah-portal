@@ -50,9 +50,9 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from "vue";
-import { Button, createResource, Dialog, FormControl } from "frappe-ui";
-import { session } from "../data/session";
+import { Button, Dialog, FormControl, createResource } from "frappe-ui"
+import { computed, ref, watch } from "vue"
+import { session } from "../data/session"
 
 const props = defineProps({
 	modelValue: {
@@ -64,46 +64,46 @@ const props = defineProps({
 		required: true,
 		validator: (value) => ["Electricity", "Water", "Gas"].includes(value),
 	},
-});
+})
 
-const emit = defineEmits(["update:modelValue", "success"]);
+const emit = defineEmits(["update:modelValue", "success"])
 
 const show = computed({
 	get: () => props.modelValue,
 	set: (value) => emit("update:modelValue", value),
-});
+})
 
 const formData = ref({
 	subject: "",
 	description: "",
 	phone: "",
 	address: "",
-});
+})
 
 // have a default subject, description
 watch(
 	() => props.serviceType,
 	(newType) => {
-		formData.value.subject = `New ${newType} Connection Request`;
-		formData.value.description = `I would like to request a new ${newType} connection. Please process my application.`;
+		formData.value.subject = `New ${newType} Connection Request`
+		formData.value.description = `I would like to request a new ${newType} connection. Please process my application.`
 	},
 	{ immediate: true },
-);
+)
 
 const submitResource = createResource({
 	url: "frappe.client.insert",
 	onSuccess: (data) => {
-		emit("success", data);
-		closeDialog();
+		emit("success", data)
+		closeDialog()
 		// Reset form
 		formData.value = {
 			subject: `New ${props.serviceType} Connection Request`,
 			description: `I would like to request a new ${props.serviceType} connection. Please process my application.`,
 			phone: "",
 			address: "",
-		};
+		}
 	},
-});
+})
 
 const handleSubmit = () => {
 	const doc = {
@@ -115,14 +115,14 @@ const handleSubmit = () => {
 		description: formData.value.description,
 		phone: formData.value.phone,
 		address: formData.value.address,
-	};
+	}
 
 	submitResource.submit({
 		doc: JSON.stringify(doc),
-	});
-};
+	})
+}
 
 const closeDialog = () => {
-	show.value = false;
-};
+	show.value = false
+}
 </script>

@@ -56,12 +56,12 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
-import { useMutation, useQueryClient } from "@tanstack/vue-query";
-import { Alert, Button, Dialog, FormControl } from "frappe-ui";
+import { useMutation, useQueryClient } from "@tanstack/vue-query"
+import { Alert, Button, Dialog, FormControl } from "frappe-ui"
+import { computed, ref } from "vue"
 
-import { processPayment } from "../api";
-import { PAYMENT_METHODS } from "../constants";
+import { processPayment } from "../api"
+import { PAYMENT_METHODS } from "../constants"
 
 const props = defineProps({
 	modelValue: {
@@ -72,22 +72,22 @@ const props = defineProps({
 		type: Object,
 		default: null,
 	},
-});
+})
 
-const emit = defineEmits(["update:modelValue", "success"]);
+const emit = defineEmits(["update:modelValue", "success"])
 
-const queryClient = useQueryClient();
+const queryClient = useQueryClient()
 
 const show = computed({
 	get: () => props.modelValue,
 	set: (value) => emit("update:modelValue", value),
-});
+})
 
-const paymentMethod = ref("");
+const paymentMethod = ref("")
 
 const billDetails = computed(() => {
-	if (!props.bill) return [];
-	
+	if (!props.bill) return []
+
 	return [
 		{
 			label: "Bill Number",
@@ -109,29 +109,30 @@ const billDetails = computed(() => {
 			label: "Total Amount",
 			value: `₹${props.bill.total_amount}`,
 		},
-	];
-});
+	]
+})
 
 const { mutate, isPending, isError, error } = useMutation({
-	mutationFn: ({ billName, paymentMethod }) => processPayment(billName, paymentMethod),
+	mutationFn: ({ billName, paymentMethod }) =>
+		processPayment(billName, paymentMethod),
 	onSuccess: (data) => {
-		queryClient.invalidateQueries({ queryKey: ["bills"] });
-		emit("success", data);
-		closeDialog();
-		paymentMethod.value = "";
+		queryClient.invalidateQueries({ queryKey: ["bills"] })
+		emit("success", data)
+		closeDialog()
+		paymentMethod.value = ""
 	},
-});
+})
 
 const handlePayment = () => {
-	if (!props.bill || !paymentMethod.value) return;
+	if (!props.bill || !paymentMethod.value) return
 
 	mutate({
 		billName: props.bill.name,
 		paymentMethod: paymentMethod.value,
-	});
-};
+	})
+}
 
 const closeDialog = () => {
-	show.value = false;
-};
+	show.value = false
+}
 </script>

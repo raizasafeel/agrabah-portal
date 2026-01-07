@@ -15,22 +15,22 @@
 </template>
 
 <script setup>
-import { Tabs } from "frappe-ui";
-import { session } from "../data/session";
-import ServiceView from "../components/ServiceTemplate.vue";
+import { Tabs } from "frappe-ui"
+import ServiceView from "../components/ServiceTemplate.vue"
+import { session } from "../data/session"
 
 const tabs = [
 	{
 		label: "⛽ Gas",
-    value: "Gas",
+		value: "Gas",
 	},
 	{
 		label: "🚰 Water",
-    value: "Water",
+		value: "Water",
 	},
 	{
 		label: "🔌 Electricity",
-    value: "Electricity",
+		value: "Electricity",
 	},
-];
+]
 </script>

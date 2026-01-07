@@ -75,43 +75,43 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import { useMutation } from "@tanstack/vue-query";
-import { Alert, Button, Card, FormControl } from "frappe-ui";
+import { useMutation } from "@tanstack/vue-query"
+import { Alert, Button, Card, FormControl } from "frappe-ui"
+import { ref } from "vue"
+import { useRouter } from "vue-router"
 
-import { createServiceRequest } from "../api";
-import { REQUEST_TYPES, SERVICE_TYPES_WITH_GENERAL } from "../constants";
-import { session } from "../data/session";
+import { createServiceRequest } from "../api"
+import { REQUEST_TYPES, SERVICE_TYPES_WITH_GENERAL } from "../constants"
+import { session } from "../data/session"
 
-const router = useRouter();
+const router = useRouter()
 
 const formData = ref({
 	request_type: "",
 	service_type: "",
 	subject: "",
 	description: "",
-});
+})
 
-const showSuccess = ref(false);
+const showSuccess = ref(false)
 
 const { mutate, isPending, isError, error } = useMutation({
 	mutationFn: createServiceRequest,
 	onSuccess: (data) => {
-		showSuccess.value = true;
+		showSuccess.value = true
 
 		formData.value = {
 			request_type: "",
 			service_type: "",
 			subject: "",
 			description: "",
-		};
+		}
 
 		setTimeout(() => {
-			router.push({ name: "Home" });
-		}, 2000);
+			router.push({ name: "Home" })
+		}, 2000)
 	},
-});
+})
 
 const handleSubmit = () => {
 	mutate({
@@ -120,10 +120,10 @@ const handleSubmit = () => {
 		service_type: formData.value.service_type,
 		subject: formData.value.subject,
 		description: formData.value.description,
-	});
-};
+	})
+}
 
 const goBack = () => {
-	router.push({ name: "Home" });
-};
+	router.push({ name: "Home" })
+}
 </script>

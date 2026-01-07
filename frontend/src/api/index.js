@@ -1,14 +1,14 @@
-import { call } from "frappe-ui";
-import { MAX_RECORDS_LIMIT } from "../constants";
+import { call } from "frappe-ui"
+import { MAX_RECORDS_LIMIT } from "../constants"
 
 export async function fetchUserData(userName) {
 	const response = await call("frappe.client.get", {
 		doctype: "User",
 		name: userName,
 		fields: ["name", "full_name", "user_image", "email"],
-	});
+	})
 
-	return response;
+	return response
 }
 
 export async function fetchBills(serviceType) {
@@ -32,9 +32,9 @@ export async function fetchBills(serviceType) {
 		},
 		order_by: "creation desc",
 		limit_page_length: MAX_RECORDS_LIMIT,
-	});
+	})
 
-	return response || [];
+	return response || []
 }
 
 export async function createServiceRequest(data) {
@@ -43,30 +43,32 @@ export async function createServiceRequest(data) {
 			doctype: "Service Request",
 			...data,
 		},
-	});
+	})
 
-	return response;
+	return response
 }
 
 function generatePaymentReferenceId() {
-	const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	const LETTER_COUNT = 4;
-	const MIN_NUMBER = 1000;
-	const MAX_NUMBER = 9999;
+	const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	const LETTER_COUNT = 4
+	const MIN_NUMBER = 1000
+	const MAX_NUMBER = 9999
 
 	const randomLetters = Array.from(
 		{ length: LETTER_COUNT },
 		() => LETTERS[Math.floor(Math.random() * LETTERS.length)],
-	).join("");
+	).join("")
 
-	const randomNumbers = Math.floor(MIN_NUMBER + Math.random() * (MAX_NUMBER - MIN_NUMBER + 1));
+	const randomNumbers = Math.floor(
+		MIN_NUMBER + Math.random() * (MAX_NUMBER - MIN_NUMBER + 1),
+	)
 
-	return `PYR.${randomLetters}-${randomNumbers}`;
+	return `PYR.${randomLetters}-${randomNumbers}`
 }
 
 export async function processPayment(billName, paymentMethod) {
-	const paymentRefId = generatePaymentReferenceId();
-	const today = new Date().toISOString().split("T")[0];
+	const paymentRefId = generatePaymentReferenceId()
+	const today = new Date().toISOString().split("T")[0]
 
 	const response = await call("frappe.client.insert", {
 		doc: {
@@ -76,9 +78,9 @@ export async function processPayment(billName, paymentMethod) {
 			payment_method: paymentMethod,
 			date: today,
 		},
-	});
+	})
 
-	return response;
+	return response
 }
 
 export async function updateBillPayment(billName, paymentData) {
@@ -86,7 +88,7 @@ export async function updateBillPayment(billName, paymentData) {
 		doctype: "Utility Bill",
 		name: billName,
 		fieldname: paymentData,
-	});
+	})
 
-	return response;
+	return response
 }

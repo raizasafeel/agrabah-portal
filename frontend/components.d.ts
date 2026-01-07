@@ -8,24 +8,24 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    BillTable: typeof import('./src/components/billTable.vue')['default']
-    DataChart: typeof import('./src/components/DataChart.vue')['default']
+    BillTable: typeof import("./src/components/billTable.vue")["default"]
+    DataChart: typeof import("./src/components/DataChart.vue")["default"]
     DataTable: typeof import('./src/components/DataTable.vue')['default']
-    FeedbackForm: typeof import('./src/components/FeedbackForm.vue')['default']
-    GeneralPageOutline: typeof import('./src/components/generalPageOutline.vue')['default']
-    HeaderAvatar: typeof import('./src/components/headerAvatar.vue')['default']
-    LoadingSpinner: typeof import('./src/components/LoadingSpinner.vue')['default']
-    LoginCard: typeof import('./src/components/LoginCard.vue')['default']
-    NewConnectionCard: typeof import('./src/components/NewConnectionCard.vue')['default']
+    FeedbackForm: typeof import("./src/components/FeedbackForm.vue")["default"]
+    GeneralPageOutline: typeof import(
+    HeaderAvatar: typeof import('./src/components/HeaderAvatar.vue')['default']
+    LoadingSpinner: typeof import(
+    LoginCard: typeof import("./src/components/LoginCard.vue")["default"]
+    NewConnectionCard: typeof import(
     NewConnectionForm: typeof import('./src/components/NewConnectionForm.vue')['default']
-    PageHeader: typeof import('./src/components/pageHeader.vue')['default']
+    PageHeader: typeof import('./src/components/PageHeader.vue')['default']
     PayNowForm: typeof import('./src/components/PayNowForm.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ServiceTemplate: typeof import('./src/components/ServiceTemplate.vue')['default']
-    ServiceView: typeof import('./src/components/ServiceView.vue')['default']
-    SummaryNumbersChart: typeof import('./src/components/summaryNumbersChart.vue')['default']
-    SupportForm: typeof import('./src/components/SupportForm.vue')['default']
-    Test: typeof import('./src/components/test.vue')['default']
+    ServiceView: typeof import("./src/components/ServiceView.vue")["default"]
+    SummaryNumbersChart: typeof import('./src/components/SummaryNumbersChart.vue')['default']
+    SupportForm: typeof import("./src/components/SupportForm.vue")["default"]
+    Test: typeof import("./src/components/test.vue")["default"]
   }
 }

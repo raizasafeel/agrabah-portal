@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { RouterLink } from "vue-router";
+import { RouterLink } from "vue-router"
 
-import HeaderAvatar from "./HeaderAvatar.vue";
+import HeaderAvatar from "./HeaderAvatar.vue"
 </script>

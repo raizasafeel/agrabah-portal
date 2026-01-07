@@ -41,27 +41,27 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import { Button, Input } from "frappe-ui";
+import { Button, Input } from "frappe-ui"
+import { ref } from "vue"
+import { useRouter } from "vue-router"
 
-import { session } from "../data/session";
+import { session } from "../data/session"
 
-const router = useRouter();
-const email = ref("");
-const password = ref("");
+const router = useRouter()
+const email = ref("")
+const password = ref("")
 
 const login = () => {
 	if (session.login.loading) {
-		return;
+		return
 	}
 	if (!session.user) {
 		session.login.submit({
 			email: email.value,
 			password: password.value,
-		});
+		})
 	} else {
-		router.push({ name: "Home" });
+		router.push({ name: "Home" })
 	}
-};
+}
 </script>

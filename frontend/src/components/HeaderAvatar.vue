@@ -19,33 +19,33 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
-import { useRouter } from "vue-router";
-import { useQuery } from "@tanstack/vue-query";
-import { Avatar, Dropdown } from "frappe-ui";
+import { useQuery } from "@tanstack/vue-query"
+import { Avatar, Dropdown } from "frappe-ui"
+import { computed } from "vue"
+import { useRouter } from "vue-router"
 
-import { fetchUserData } from "../api";
-import { session } from "../data/session";
+import { fetchUserData } from "../api"
+import { session } from "../data/session"
 
-const router = useRouter();
+const router = useRouter()
 
 const { data: userData, isLoading } = useQuery({
 	queryKey: ["user", session.user],
 	queryFn: () => fetchUserData(session.user),
 	enabled: computed(() => !!session.user),
-});
+})
 
 const logout = () => {
-	session.logout.submit();
-};
+	session.logout.submit()
+}
 
 const navigateToSupport = () => {
-	router.push({ name: "Support" });
-};
+	router.push({ name: "Support" })
+}
 
 const navigateToFeedback = () => {
-	router.push({ name: "Feedback" });
-};
+	router.push({ name: "Feedback" })
+}
 
 const dropdownOptions = [
 	{
@@ -64,5 +64,5 @@ const dropdownOptions = [
 		theme: "red",
 		onClick: () => logout(),
 	},
-];
+]
 </script>

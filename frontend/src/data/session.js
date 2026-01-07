@@ -1,16 +1,16 @@
-import router from "@/router";
-import { createResource } from "frappe-ui";
-import { computed, reactive } from "vue";
+import router from "@/router"
+import { createResource } from "frappe-ui"
+import { computed, reactive } from "vue"
 
-import { userResource } from "./user";
+import { userResource } from "./user"
 
 export function sessionUser() {
-	const cookies = new URLSearchParams(document.cookie.split("; ").join("&"));
-	let _sessionUser = cookies.get("user_id");
+	const cookies = new URLSearchParams(document.cookie.split("; ").join("&"))
+	let _sessionUser = cookies.get("user_id")
 	if (_sessionUser === "Guest") {
-		_sessionUser = null;
+		_sessionUser = null
 	}
-	return _sessionUser;
+	return _sessionUser
 }
 
 export const session = reactive({
@@ -20,13 +20,13 @@ export const session = reactive({
 			return {
 				usr: email,
 				pwd: password,
-			};
+			}
 		},
 		onSuccess(data) {
-			userResource.reload();
-			session.user = sessionUser();
-			session.login.reset();
-			router.push({ name: "Home" });
+			userResource.reload()
+			session.user = sessionUser()
+			session.login.reset()
+			router.push({ name: "Home" })
 		},
 		onError(error) {
 			// Error is handled by the UI components
@@ -35,11 +35,11 @@ export const session = reactive({
 	logout: createResource({
 		url: "logout",
 		onSuccess() {
-			userResource.reset();
-			session.user = sessionUser();
-			router.replace({ name: "Login" });
+			userResource.reset()
+			session.user = sessionUser()
+			router.replace({ name: "Login" })
 		},
 	}),
 	user: sessionUser(),
 	isLoggedIn: computed(() => !!session.user),
-});
+})

@@ -1,6 +1,6 @@
-import { computed } from "vue";
-import { formatMostRecentDate } from "../utils/date";
-import { PAYMENT_STATUS } from "../constants";
+import { computed } from "vue"
+import { PAYMENT_STATUS } from "../constants"
+import { formatMostRecentDate } from "../utils/date"
 
 export function useBillSummary(bills) {
 	return computed(() => {
@@ -9,22 +9,22 @@ export function useBillSummary(bills) {
 				{ title: "Total Bills", value: 0 },
 				{ title: "Total Unpaid Amount", value: 0, prefix: "₹" },
 				{ title: "Last Payment Date", value: "-" },
-			];
+			]
 		}
 
 		const paidBills = bills.value.filter(
 			(bill) => bill.payment_status === PAYMENT_STATUS.PAID,
-		);
+		)
 
 		const paymentDates = paidBills
 			.filter((bill) => bill.payment_date)
-			.map((bill) => bill.payment_date);
+			.map((bill) => bill.payment_date)
 
-		const lastPaymentDate = formatMostRecentDate(paymentDates);
+		const lastPaymentDate = formatMostRecentDate(paymentDates)
 
 		const totalUnpaidAmount = bills.value
 			.filter((bill) => bill.payment_status === PAYMENT_STATUS.UNPAID)
-			.reduce((sum, bill) => sum + (bill.total_amount || 0), 0);
+			.reduce((sum, bill) => sum + (bill.total_amount || 0), 0)
 
 		return [
 			{
@@ -40,7 +40,6 @@ export function useBillSummary(bills) {
 				title: "Last Payment Date",
 				value: lastPaymentDate,
 			},
-		];
-	});
+		]
+	})
 }
-
