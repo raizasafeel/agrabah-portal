@@ -123,6 +123,11 @@ app_license = "mit"
 # permission_query_conditions = {
 # 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
 # }
+permission_query_conditions = {
+    "Utility Bill": "agrabah_portal.billing.doctype.utility_bill.utility_bill.get_permission_query_conditions",
+    "Bill Payment": "agrabah_portal.billing.doctype.payment_reference.payment_reference.get_permission_query_conditions",
+    "Customer Connection": "agrabah_portal.utilities_management.doctype.customer_connection.customer_connection.get_permission_query_conditions",
+}
 #
 # has_permission = {
 # 	"Event": "frappe.desk.doctype.event.event.has_permission",

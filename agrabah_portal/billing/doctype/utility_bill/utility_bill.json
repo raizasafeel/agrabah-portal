@@ -1,0 +1,312 @@
+{
+ "actions": [],
+ "autoname": "format:BILL-{service_type}-{bill_number}",
+ "creation": "2026-01-02 11:58:40.461799",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_cqzi",
+  "customer",
+  "connection",
+  "tariff_rate",
+  "service_type",
+  "column_break_vhwb",
+  "bill_number",
+  "billing_period",
+  "bill_date",
+  "due_date",
+  "billling_tab",
+  "meter_reading_section",
+  "previous_reading",
+  "current_reading",
+  "column_break_mxzt",
+  "units_consumed",
+  "reading_date",
+  "charges_section",
+  "rate_per_unit",
+  "base_charges",
+  "total_amount",
+  "column_break_niwx",
+  "tax_amount",
+  "fixed_charges",
+  "payment_tab",
+  "payment_section",
+  "column_break_myyb",
+  "payment_status",
+  "payment_date",
+  "column_break_pgjf",
+  "payment_reference",
+  "amended_from_section",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_cqzi",
+   "fieldtype": "Section Break",
+   "label": "Bill Information"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Utility Bill",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Customer",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "connection",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Connection",
+   "options": "Customer Connection",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "connection.service_type",
+   "fieldname": "service_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Service Type",
+   "read_only": 1
+  },
+  {
+   "fieldname": "bill_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Bill Date"
+  },
+  {
+   "fieldname": "due_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Due Date"
+  },
+  {
+   "fieldname": "meter_reading_section",
+   "fieldtype": "Section Break",
+   "label": "Meter Reading"
+  },
+  {
+   "fieldname": "previous_reading",
+   "fieldtype": "Float",
+   "label": "Previous Reading"
+  },
+  {
+   "fieldname": "current_reading",
+   "fieldtype": "Float",
+   "label": "Current Reading"
+  },
+  {
+   "fieldname": "units_consumed",
+   "fieldtype": "Float",
+   "label": "Units Consumed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reading_date",
+   "fieldtype": "Date",
+   "label": "Reading Date"
+  },
+  {
+   "fieldname": "billling_tab",
+   "fieldtype": "Tab Break",
+   "label": "Billling"
+  },
+  {
+   "fieldname": "charges_section",
+   "fieldtype": "Section Break",
+   "label": "Charges"
+  },
+  {
+   "fieldname": "base_charges",
+   "fieldtype": "Currency",
+   "label": "Base Charges",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "tariff_rate.fixed_charges",
+   "fieldname": "fixed_charges",
+   "fieldtype": "Currency",
+   "label": "Fixed Charges",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tax_amount",
+   "fieldtype": "Currency",
+   "label": "Tax Amount"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "payment_tab",
+   "fieldtype": "Tab Break",
+   "label": "Payment"
+  },
+  {
+   "fieldname": "column_break_myyb",
+   "fieldtype": "Column Break",
+   "options": "Unpaid\nPaid \nOverdue"
+  },
+  {
+   "fieldname": "payment_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Payment Status",
+   "options": "Unpaid\nPaid\nOverdue",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "payment_reference.date",
+   "fetch_if_empty": 1,
+   "fieldname": "payment_date",
+   "fieldtype": "Date",
+   "label": "Payment Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "bill_number",
+   "fieldtype": "Data",
+   "label": "Bill Number",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_vhwb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "billing_period",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Billing Period"
+  },
+  {
+   "fetch_from": "connection.tariff_plan",
+   "fieldname": "tariff_rate",
+   "fieldtype": "Link",
+   "label": "Tariff Rate",
+   "options": "Tariff Plan",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fetch_from": "tariff_rate.rate_per_unit",
+   "fieldname": "rate_per_unit",
+   "fieldtype": "Data",
+   "label": "Rate Per Unit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_mxzt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_niwx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "payment_section",
+   "fieldtype": "Section Break",
+   "label": "Payment"
+  },
+  {
+   "fieldname": "amended_from_section",
+   "fieldtype": "Section Break",
+   "label": "Amended From"
+  },
+  {
+   "fieldname": "column_break_pgjf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "payment_reference",
+   "fieldtype": "Link",
+   "label": "Payment Reference",
+   "options": "Payment Reference",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-01-06 18:44:08.619219",
+ "modified_by": "Administrator",
+ "module": "Billing",
+ "name": "Utility Bill",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Customer",
+   "share": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [
+  {
+   "color": "Red",
+   "title": "Unpaid"
+  },
+  {
+   "color": "Green",
+   "title": "Paid"
+  },
+  {
+   "color": "Orange",
+   "title": "Overdue"
+  }
+ ],
+ "title_field": "bill_number",
+ "track_changes": 1
+}
